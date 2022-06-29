@@ -47,6 +47,7 @@ h2 {
     font-weight: 300;
     font-size: 2.25em;
     -webkit-animation: up 2s cubic-bezier(.39, 0, .38, 1);
+    text-align: center;
 }
 
 h3 {
