@@ -1,8 +1,9 @@
-import {GET_WEATHER} from "./actionType";
+import { GET_WEATHER} from "./actionType";
 
 
 const initialState = {
     degree: [],
+
 }
 export  const getWeatherReducer = ( state = initialState, action) => {
 
@@ -11,10 +12,12 @@ export  const getWeatherReducer = ( state = initialState, action) => {
             return{
                 ...state,
                 degree: {...action.payload}
-            }
+            };
         default:
             return  state;
     }
 }
 
 export default getWeatherReducer
+
+

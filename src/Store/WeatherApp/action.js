@@ -1,4 +1,4 @@
-import { GET_WEATHER } from './actionType'
+import { GET_WEATHER} from './actionType'
 
 export function getWeather(payload) {
 
@@ -6,4 +6,9 @@ export function getWeather(payload) {
         type: GET_WEATHER,
         payload
     }
+
 }
+
+
+
+

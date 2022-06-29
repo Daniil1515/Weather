@@ -1,14 +1,18 @@
 import React, {useEffect} from 'react';
 import './weatherStyle.css'
 import {useDispatch, useSelector} from "react-redux";
-import {fetchWeather} from "../../Store/Api/degreeApi";
+import {fetchWeather} from "../../Store/Api/AppApi";
 
 
 const WeatherCard = () => {
 
     const dispatch = useDispatch()
 
+
     const degree = useSelector(state=>state.weather.degree.main?.temp)
+    const city = useSelector(state=>state.weather.degree?.name)
+
+
 
 
     useEffect(()=>{
@@ -20,7 +24,7 @@ const WeatherCard = () => {
 
         <div className="card">
 
-            <h2>Brussels</h2>
+            <h2>{city}</h2>
             <h3>Cloudy<span>Wind 10km/h <span className="dot">•</span> Precip 0%</span></h3>
             <h1>{degree}</h1>
             <div className="sky">
