@@ -11,8 +11,10 @@ const WeatherCard = () => {
 
     const degree = useSelector(state=>state.weather.degree.main?.temp)
     const city = useSelector(state=>state.weather.degree?.name)
-    const clouds = useSelector(state=>state.weather.degree.weather[0].main)
+    // const clouds = useSelector(state=>state.weather.degree.weather[0]?.main)
 
+    const wind = useSelector(state=>state.weather.degree.wind?.speed)
+    const humidity = useSelector(state=>state.weather.degree.main?.humidity)
 
 
 
@@ -20,7 +22,7 @@ const WeatherCard = () => {
 
     useEffect(()=>{
       dispatch(fetchWeather())
-    },[])
+    },[ ])
 
     return (
 
@@ -28,7 +30,7 @@ const WeatherCard = () => {
         <div className="card">
 
             <h2>{city}</h2>
-            <h3>1<span>Wind 10km/h <span className="dot">•</span> Precip 0%</span></h3>
+            <h3>1<span>Wind {wind} km/h <span className="dot">---</span>Humidity {humidity}%</span></h3>
             <h1>{degree}</h1>
             <div className="sky">
                 <div className="sun"></div>
