@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import './weatherStyle.css'
 import {useDispatch, useSelector} from "react-redux";
 import {fetchWeather} from "../../Store/Api/AppApi";
+import moment from 'moment';
+
 
 
 const WeatherCard = () => {
@@ -10,11 +12,14 @@ const WeatherCard = () => {
 
 
     const degree = useSelector(state=>state.weather.degree.main?.temp)
+    const feelsLike = useSelector(state=>state.weather.degree.main?.feels_like)
     const city = useSelector(state=>state.weather.degree?.name)
-    // const clouds = useSelector(state=>state.weather.degree.weather[0]?.main)
+    // const clouds = useSelector(state=>state.weather.degree?.weather[0])
 
     const wind = useSelector(state=>state.weather.degree.wind?.speed)
     const humidity = useSelector(state=>state.weather.degree.main?.humidity)
+    // const icon = useSelector(state=>state.weather.degree.weather[0].icon)
+    const pressure = useSelector(state=>state.weather.degree.main?.pressure)
 
 
 
@@ -30,39 +35,40 @@ const WeatherCard = () => {
         <div className="card">
 
             <h2>{city}</h2>
-            <h3>1<span>Wind {wind} km/h <span className="dot">---</span>Humidity {humidity}%</span></h3>
-            <h1>{degree}</h1>
+            <div className="date__time">
+            <p>Day: {moment().format('dddd')}</p>
+            <p>Date: {moment().format('LL')}</p>
+            </div>
+            <h1>{degree}°C</h1>
             <div className="sky">
                 <div className="sun"></div>
                 <div className="cloud">
-                    <div className="circle-small"></div>
-                    <div className="circle-tall"></div>
-                    <div className="circle-medium"></div>
+                    <img
+                        // src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+                        alt=""
+                    />
                 </div>
             </div>
-            <table>
-                <tr>
-                    <td>TUE</td>
-                    <td>WED</td>
-                    <td>THU</td>
-                    <td>FRI</td>
-                    <td>SAT</td>
-                </tr>
-                <tr>
-                    <td>30°</td>
-                    <td>34°</td>
-                    <td>36°</td>
-                    <td>34°</td>
-                    <td>37°</td>
-                </tr>
-                <tr>
-                    <td>17°</td>
-                    <td>22°</td>
-                    <td>19°</td>
-                    <td>23°</td>
-                    <td>19°</td>
-                </tr>
-            </table>
+            <ul className="list">
+                <li>
+                    <b>Clouds</b>
+                </li>
+                <li>
+                    <b>Feels like = </b>{feelsLike}
+                </li>
+                <li>
+                    <b>Pressure = </b>{pressure}
+                </li>
+                <li>
+                    <b>Humidity = </b>{humidity} %
+                </li>
+                <li>
+                    <b>Wind = </b>{wind} km/h
+                </li>
+
+            </ul>
+
+
         </div>
     );
 };
