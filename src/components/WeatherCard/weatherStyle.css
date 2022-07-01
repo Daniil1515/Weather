@@ -197,3 +197,9 @@ tr:nth-child(3) {
         opacity: 1;
     }
 }
+.test{
+    color: red;
+}
+.rest{
+    color: green
+}

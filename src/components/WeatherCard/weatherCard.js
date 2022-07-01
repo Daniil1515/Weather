@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {useEffect} from 'react';
 import './weatherStyle.css'
 import {useDispatch, useSelector} from "react-redux";
@@ -7,6 +8,10 @@ import moment from 'moment';
 
 
 const WeatherCard = () => {
+    useEffect(  ()=>{
+        dispatch(fetchWeather())
+    },[])
+
 
     const dispatch = useDispatch()
 
@@ -14,27 +19,22 @@ const WeatherCard = () => {
     const degree = useSelector(state=>state.weather.degree.main?.temp)
     const feelsLike = useSelector(state=>state.weather.degree.main?.feels_like)
     const city = useSelector(state=>state.weather.degree?.name)
-    // const clouds = useSelector(state=>state.weather.degree?.weather[0])
+    const clouds = useSelector(state=>state.weather.degree.weather)
 
     const wind = useSelector(state=>state.weather.degree.wind?.speed)
     const humidity = useSelector(state=>state.weather.degree.main?.humidity)
-    // const icon = useSelector(state=>state.weather.degree.weather[0].icon)
+    //const icon = useSelector(state=>state.weather.degree.weather[0].)
     const pressure = useSelector(state=>state.weather.degree.main?.pressure)
-
-
-
-
-
-    useEffect(()=>{
-      dispatch(fetchWeather())
-    },[ ])
+    console.log(clouds)
 
     return (
 
+        clouds &&
 
         <div className="card">
 
             <h2>{city}</h2>
+
             <div className="date__time">
             <p>Day: {moment().format('dddd')}</p>
             <p>Date: {moment().format('LL')}</p>
@@ -51,13 +51,14 @@ const WeatherCard = () => {
             </div>
             <ul className="list">
                 <li>
-                    <b>Clouds</b>
+                    <b>Clouds = </b>
+                    {clouds[0].main}
                 </li>
                 <li>
-                    <b>Feels like = </b>{feelsLike}
+                    <b>Feels like = </b><b className={ feelsLike > 30  ? "test" : "rest "}>{feelsLike}</b>
                 </li>
                 <li>
-                    <b>Pressure = </b>{pressure}
+                    <b>Pressure = </b><b>{pressure}</b>
                 </li>
                 <li>
                     <b>Humidity = </b>{humidity} %
